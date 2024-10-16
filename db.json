@@ -8,7 +8,9 @@
       "quantity": 5,
       "description": "Sản phẩm B mới ra mắt, phù hợp cho nhiều đối tượng.",
       "available": true,
-      "category": "category 2"
+      "category": 1,
+      "createdAt": "2023-10-16T05:00:00.000Z",
+      "updatedAt": "2023-10-16T05:00:00.000Z"
     },
     {
       "id": 3,
@@ -18,7 +20,9 @@
       "quantity": 8,
       "description": "Sản phẩm C với thiết kế độc đáo và tinh tế.",
       "available": false,
-      "category": "category 1"
+      "category": 1,
+      "createdAt": "2023-10-16T05:30:00.000Z",
+      "updatedAt": "2023-10-16T05:30:00.000Z"
     },
     {
       "id": 4,
@@ -28,7 +32,9 @@
       "quantity": 12,
       "description": "Sản phẩm D rất được ưa chuộng trên thị trường.",
       "available": true,
-      "category": "category 2"
+      "category": 2,
+      "createdAt": "2023-10-16T06:00:00.000Z",
+      "updatedAt": "2023-10-16T06:00:00.000Z"
     },
     {
       "id": 5,
@@ -38,17 +44,65 @@
       "quantity": 20,
       "description": "Sản phẩm E chất lượng vượt trội, bảo hành dài hạn.",
       "available": true,
-      "category": "category 1"
+      "category": 1,
+      "createdAt": "2023-10-16T07:00:00.000Z",
+      "updatedAt": "2023-10-16T07:00:00.000Z"
     },
     {
-      "id": 7,
-      "title": "Sản phẩm G",
-      "image": "https://picsum.photos/id/7/200",
-      "price": 350000,
-      "quantity": 9,
-      "description": "Sản phẩm G thích hợp cho các công việc văn phòng.",
-      "available": true,
-      "category": "category 1"
+      "title": "new update",
+      "price": 213213,
+      "quantity": 21312312,
+      "description": "mota update",
+      "available": false,
+      "category": 2,
+      "image": "https://res.cloudinary.com/dajbfnrau/image/upload/v1729060494/d3y9umateahbovuqca2k.jpg",
+      "createdAt": "2024-10-16T06:00:00.000Z",
+      "updatedAt": "2024-10-16T06:34:57.000Z",
+      "id": 8
+    },
+    {
+      "title": "ádasd update",
+      "price": 123,
+      "quantity": 21312,
+      "description": "mota update",
+      "category": 2,
+      "createdAt": "2024-10-16T06:30:00.000Z",
+      "updatedAt": "2024-10-16T06:42:31.000Z",
+      "id": 9
+    },
+    {
+      "title": "sadsa",
+      "price": 321,
+      "quantity": 123,
+      "category": 1,
+      "createdAt": "2024-10-16T07:06:09.000Z",
+      "id": 10
+    },
+    {
+      "title": "adsad",
+      "price": 123,
+      "quantity": 123,
+      "category": 2,
+      "createdAt": "2024-10-16T07:49:15.556Z",
+      "updatedAt": "2024-10-16T08:12:35.868Z",
+      "id": 11
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "title": "Category 1",
+      "quantityProduct": 3
+    },
+    {
+      "id": 2,
+      "title": "Category 2",
+      "quantityProduct": 4
+    },
+    {
+      "title": "Category 3",
+      "createdAt": "2024-10-16T08:35:02.509Z",
+      "id": 3
     }
   ]
 }

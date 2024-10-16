@@ -111,7 +111,7 @@ const ProductsList = () => {
   return (
     <>
       {contextHolder}
-      <Link to={"/admin/products/list"}>
+      <Link to={"/admin/products/add"}>
         <Button color="primary" variant="solid" className="mb-2">
           Add new product
         </Button>

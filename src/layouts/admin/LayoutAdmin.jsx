@@ -26,16 +26,15 @@ const items = [
   getItem("Products", "sub3", <DesktopOutlined />, null, [
     getItem("Product List", "10", null, "/admin/products/list"),
     getItem("Add Product", "11", null, "/admin/products/add"),
-    getItem("Update Product", "12", null, "/admin/products/:id/update"),
   ]),
   getItem("User", "sub1", <UserOutlined />, null, [
     getItem("Tom", "3", null, "/admin/user/tom"),
     getItem("Bill", "4", null, "/admin/user/bill"),
     getItem("Alex", "5", null, "/admin/user/alex"),
   ]),
-  getItem("Team", "sub2", <TeamOutlined />, null, [
-    getItem("Team 1", "6", null, "/admin/team/team1"),
-    getItem("Team 2", "8", null, "/admin/team/team2"),
+  getItem("Category", "sub2", <TeamOutlined />, null, [
+    getItem("Category List", "6", null, "/admin/categories/list"),
+    getItem("Add Category", "8", null, "/admin/categories/add"),
   ]),
   getItem("Files", "9", <FileOutlined />, "/admin/files"),
 ];

@@ -1,23 +1,22 @@
-import React from "react";
-import { PlusOutlined } from "@ant-design/icons";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   Button,
+  DatePicker,
   Form,
+  Image,
   Input,
   InputNumber,
-  Rate,
-  Upload,
-  message,
-  Skeleton,
-  Typography,
-  Image,
-  Switch,
-  Select,
   Popconfirm,
+  Select,
+  Skeleton,
+  Switch,
+  Typography,
+  message,
 } from "antd";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import React from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import moment from "moment";
 
 const { Title } = Typography;
 
@@ -32,6 +31,17 @@ const ProductDetail = () => {
     queryFn: async () => {
       const response = await axios.get(`http://localhost:3000/products/${id}`);
       return response.data;
+    },
+  });
+
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const response = await axios.get(`http://localhost:3000/categories`);
+      return response.data.map((category) => ({
+        ...category,
+        key: category.id,
+      }));
     },
   });
 
@@ -56,7 +66,11 @@ const ProductDetail = () => {
   return (
     <>
       {contextHolder}
+
       <div style={{ maxWidth: 600, margin: "0 auto" }}>
+        <Form.Item>
+          <h2 className="uppercase text-3xl font-medium">{data.title}</h2>
+        </Form.Item>
         <Form.Item label="Image">
           <Image
             src={data.image}
@@ -66,9 +80,6 @@ const ProductDetail = () => {
           />
         </Form.Item>
         <Form layout="vertical">
-          <Form.Item label="Title: ">
-            <Input value={data.title} readOnly />
-          </Form.Item>
           <Form.Item label="Price: ">
             <InputNumber value={data.price} readOnly /> VND
           </Form.Item>
@@ -83,16 +94,28 @@ const ProductDetail = () => {
             <Input.TextArea rows={4} value={data.description} readOnly />
           </Form.Item>
 
-          <Form.Item label="Category">
-            <Select value={data?.category}>
-              <Select.Option value="category 1">category 1</Select.Option>
-              <Select.Option value="category 2">category 2</Select.Option>
+          <div className="flex">
+            <Form.Item className="mr-5" label="Created At: " name={"createdAt"}>
+              <DatePicker defaultValue={moment(data?.createdAt)} disabled />
+            </Form.Item>
+            <Form.Item label="Updated At: " name={"updatedAt"}>
+              <DatePicker defaultValue={moment(data?.updatedAt)} disabled />
+            </Form.Item>
+          </div>
+
+          <Form.Item label="Category: ">
+            <Select value={data.category}>
+              {categories.map((item) => (
+                <Select.Option key={item.id} value={item.id}>
+                  {item.title}
+                </Select.Option>
+              ))}
             </Select>
           </Form.Item>
 
           <Form.Item>
             <Link to={`/admin/products/${id}/update`}>
-              <button className="bg-green-500 hover:bg-green-700 text-white  py-1 px-3.5 rounded mr-1">
+              <button className="bg-green-500 hover:bg-green-700 text-white py-1 px-3.5 rounded mr-1">
                 Update
               </button>
             </Link>
