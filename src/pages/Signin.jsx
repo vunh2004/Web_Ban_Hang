@@ -4,6 +4,7 @@ import "antd/dist/reset.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const Signin = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -14,9 +15,11 @@ const Signin = () => {
       return response.data;
     },
     onSuccess(data) {
-      localStorage.setItem("token", data.accessToken);
-      console.log(data);
-      localStorage.setItem("user", JSON.stringify(data));
+      // console.log(data.user.role);
+      Cookies.set("token", data.accessToken, { expires: 1 / 24 });
+      Cookies.set("role", data.user.role, { expires: 1 / 24 });
+      Cookies.set("username", data.user.username, { expires: 1 / 24 });
+
       messageApi.success("Sign in successfully!");
       setTimeout(() => {
         nav("/");
@@ -62,7 +65,7 @@ const Signin = () => {
                 label="Email"
                 name="email"
                 rules={[
-                  { required: true, message: "Email khoong được bỏ trống!" },
+                  { required: true, message: "Email không được bỏ trống!" },
                   { type: "email", message: "Email không hợp lệ!!" },
                 ]}
               >

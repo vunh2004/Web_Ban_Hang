@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "antd";
 import axios from "axios";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { data, isLoading, isError, error } = useQuery({
@@ -32,7 +33,7 @@ const Home = () => {
                 key={product.id}
               >
                 <div className="h-56 w-full mb-3">
-                  <a href="#">
+                  <Link to={`/products/${product.id}`}>
                     <img
                       className="mx-auto h-auto dark:hidden"
                       src={product.image}
@@ -43,7 +44,7 @@ const Home = () => {
                       src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg"
                       alt=""
                     />
-                  </a>
+                  </Link>
                 </div>
                 <div className="pt-6">
                   <div className="mb-4 flex items-center justify-between gap-4">
@@ -130,12 +131,12 @@ const Home = () => {
                     </div>
                   </div>
 
-                  <a
-                    href="#"
+                  <Link
+                    to="#"
                     className="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white"
                   >
                     {product.title}
-                  </a>
+                  </Link>
 
                   <div className="mt-2 flex items-center gap-2">
                     <div className="flex items-center">

@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { Skeleton } from "antd";
+import { Popconfirm, Skeleton, message } from "antd";
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import SlideShow from "./SlideShow";
+import Cookies from "js-cookie";
 
 const LayoutClient = () => {
+  const [messageApi, contextHolder] = message.useMessage();
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
@@ -14,11 +16,28 @@ const LayoutClient = () => {
     },
   });
 
-  if (isLoading) return <Skeleton active />;
-  if (isError) return <div>Error: {error.message}</div>;
+  //!! : chuyển chuỗi sang boolean
+  const token = Cookies.get("token");
+  const username = Cookies.get("username");
+  const role = Cookies.get("role");
+
+  const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get("token")); // Xác định trạng thái đăng nhập (true)
+
+  const Logout = () => {
+    Cookies.remove("token");
+    Cookies.remove("username");
+    Cookies.remove("role");
+    setIsLoggedIn(false); // Cập nhật trạng thái đăng nhập
+    messageApi.success("Đã đăng xuất!");
+  };
+
+  useEffect(() => {
+    setIsLoggedIn(!!Cookies.get("token")); // Kiểm tra lại trạng thái đăng nhập khi component được mount
+  }, []);
 
   return (
     <>
+      {contextHolder}
       <React.Fragment>
         <header className="bg-white">
           <div className="border py-3 px-6">
@@ -120,25 +139,45 @@ const LayoutClient = () => {
                   <span className="text-sm font-medium">Cart</span>
                 </div>
 
-                <div className="ml-2   flex cursor-pointer items-center gap-x-1 rounded-md border border-transparent bg-gradient-to-r from-green-400 to-blue-500 p-[1px] hover:from-green-500 hover:to-blue-600">
-                  <Link
-                    to="/signin"
-                    className="flex items-center justify-center w-full h-full rounded-md bg-white hover:bg-transparent transition-colors duration-300 ease-in-out"
-                  >
-                    <button className="text-sm px-3 font-semibold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-white transition-all duration-300 ease-in-out">
-                      Sign in
-                    </button>
-                  </Link>
-                </div>
+                {token ? (
+                  <div className="ml-2   flex cursor-pointer items-center gap-x-1 rounded-md border border-transparent bg-gradient-to-r from-green-400 to-blue-500 p-[1px] hover:from-green-500 hover:to-blue-600">
+                    <div className="flex items-center justify-center w-full h-full rounded-md bg-white hover:bg-transparent transition-colors duration-300 ease-in-out">
+                      <Popconfirm
+                        title="Đăng xuất"
+                        description="Bạn có chắc chắn muốn đăng xuất?"
+                        onConfirm={Logout}
+                      >
+                        <button className="text-sm px-3 font-semibold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-white transition-all duration-300 ease-in-out">
+                          Log Out
+                        </button>
+                      </Popconfirm>
+                    </div>
+
+                    <h3 className="text-lg text-white font-medium flex mx-1.5">
+                      Hi, <span>{username}</span>
+                    </h3>
+                  </div>
+                ) : (
+                  <div className="ml-2   flex cursor-pointer items-center gap-x-1 rounded-md border border-transparent bg-gradient-to-r from-green-400 to-blue-500 p-[1px] hover:from-green-500 hover:to-blue-600">
+                    <Link
+                      to="/signin"
+                      className="flex items-center justify-center w-full h-full rounded-md bg-white hover:bg-transparent transition-colors duration-300 ease-in-out"
+                    >
+                      <button className="text-sm px-3 font-semibold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-white transition-all duration-300 ease-in-out">
+                        Sign in
+                      </button>
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
 
             <div className="mt-4 flex items-center justify-between">
               <div className="flex gap-x-8 mx-auto">
-                {data.length === 0 ? (
+                {data?.length === 0 ? (
                   <span className="text-gray-500">Không có danh mục nào</span>
                 ) : (
-                  data.map((cate) => (
+                  data?.map((cate) => (
                     <span
                       className="cursor-pointer rounded-sm py-1 px-2 text-sm font-medium hover:bg-gray-100"
                       key={cate.id}

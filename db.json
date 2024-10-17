@@ -132,7 +132,17 @@
       "username": "admin",
       "confirmPassword": "123456",
       "gender": "male",
+      "role": "admin",
       "id": 1
+    },
+    {
+      "email": "user@gmail.com",
+      "password": "$2a$10$eO77kwDuy7kDceDu8O5Qre2yj37ZrQIqIqNG0zF.a.hvjBY/6bnTK",
+      "username": "user",
+      "confirmPassword": "123456",
+      "gender": "male",
+      "role": "user",
+      "id": 2
     }
   ]
 }
