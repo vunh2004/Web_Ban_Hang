@@ -124,5 +124,15 @@
       "title": "Huawei",
       "id": 6
     }
+  ],
+  "users": [
+    {
+      "email": "admin@gmail.com",
+      "password": "$2a$10$lAWnUfn6YNVYSKSt5/wTUeMK0vWdCABeqNISq1nTNjrLpy51jVHLG",
+      "username": "admin",
+      "confirmPassword": "123456",
+      "gender": "male",
+      "id": 1
+    }
   ]
 }

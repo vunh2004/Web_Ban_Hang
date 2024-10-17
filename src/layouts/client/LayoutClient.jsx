@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "antd";
 import axios from "axios";
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import SlideShow from "./SlideShow";
 
 const LayoutClient = () => {
@@ -120,8 +120,15 @@ const LayoutClient = () => {
                   <span className="text-sm font-medium">Cart</span>
                 </div>
 
-                <div className="ml-2 flex cursor-pointer items-center gap-x-1 rounded-md border py-2 px-4 hover:bg-gray-100">
-                  <span className="text-sm font-medium">Sign in</span>
+                <div className="ml-2   flex cursor-pointer items-center gap-x-1 rounded-md border border-transparent bg-gradient-to-r from-green-400 to-blue-500 p-[1px] hover:from-green-500 hover:to-blue-600">
+                  <Link
+                    to="/signin"
+                    className="flex items-center justify-center w-full h-full rounded-md bg-white hover:bg-transparent transition-colors duration-300 ease-in-out"
+                  >
+                    <button className="text-sm px-3 font-semibold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-white transition-all duration-300 ease-in-out">
+                      Sign in
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

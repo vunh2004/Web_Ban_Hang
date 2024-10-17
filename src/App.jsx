@@ -10,6 +10,8 @@ import ProductUpdate from "./pages/admin/products/ProductUpdate";
 import UpdateCategory from "./pages/admin/category/UpdateCategory";
 import AddCategory from "./pages/admin/category/AddCategory";
 import ListCategory from "./pages/admin/category/ListCategory";
+import Signup from "./pages/Signup";
+import Signin from "./pages/Signin";
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
       <Route path="/" element={<LayoutClient />}>
         <Route index element={<Home />} />
       </Route>
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/signin" element={<Signin />} />
     </Routes>
   );
 }
