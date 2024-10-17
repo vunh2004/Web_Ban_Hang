@@ -24,7 +24,7 @@ const AddCategory = () => {
   });
 
   const onFinish = (values) => {
-    mutate({ ...values, createdAt: new Date().toISOString() });
+    mutate(values);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -32,6 +32,10 @@ const AddCategory = () => {
   return (
     <>
       {contextHolder}
+      <h2 className="uppercase ml-44 font-bold text-xl text-gray-800">
+        Add new category
+      </h2>
+      <hr className="border-t-4 border-yellow-500 mt-4 mb-6" />
       <Form
         name="basic"
         labelCol={{

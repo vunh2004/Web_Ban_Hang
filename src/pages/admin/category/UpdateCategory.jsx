@@ -1,19 +1,31 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Button, Form, Input, message } from "antd";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Button, Form, Input, Skeleton, message } from "antd";
 import axios from "axios";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateCategory = () => {
   const nav = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
   const queryClient = useQueryClient();
+  const { id } = useParams();
+
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["categories", id],
+    queryFn: async () => {
+      const response = await axios.get(
+        `http://localhost:3000/categories/${id}`
+      );
+      return response.data;
+    },
+  });
+
   const { mutate } = useMutation({
     mutationFn: async (category) => {
-      await axios.post(`http://localhost:3000/categories`, category);
+      await axios.put(`http://localhost:3000/categories/${id}`, category);
     },
     onSuccess() {
-      messageApi.success("Thêm danh mục thành công!");
+      messageApi.success("Cập nhật danh mục thành công!");
       queryClient.invalidateQueries({
         queryKey: ["categories"],
       });
@@ -24,14 +36,20 @@ const UpdateCategory = () => {
   });
 
   const onFinish = (values) => {
-    mutate({ ...values, createdAt: new Date().toISOString() });
+    mutate(values);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  if (isLoading) return <Skeleton active />;
   return (
     <>
       {contextHolder}
+      <h2 className="uppercase ml-44 font-bold text-xl text-gray-800">
+        Update category
+      </h2>
+      <hr className="border-t-4 border-yellow-500 mt-4 mb-6" />
       <Form
         name="basic"
         labelCol={{
@@ -43,9 +61,7 @@ const UpdateCategory = () => {
         style={{
           maxWidth: 600,
         }}
-        initialValues={{
-          remember: true,
-        }}
+        initialValues={data}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"

@@ -67,20 +67,7 @@ const ListCategory = () => {
       title: "Quantity product",
       dataIndex: "quantityProduct", // Hiển thị số lượng sản phẩm thuộc danh mục
     },
-    {
-      title: "Created At",
-      dataIndex: "createdAt",
-      render: (item) => {
-        return moment(item).format("DD/MM/YYYY HH:mm:ss");
-      },
-    },
-    {
-      title: "Updated At",
-      dataIndex: "updatedAt",
-      render: (item) => {
-        return moment(item).format("DD/MM/YYYY HH:mm:ss");
-      },
-    },
+
     {
       title: "Action",
       render: (_, item) => (
@@ -110,6 +97,10 @@ const ListCategory = () => {
   return (
     <>
       {contextHolder}
+      <h2 className="uppercase font-bold text-xl text-gray-800">
+        List category
+      </h2>
+      <hr className="border-t-4 border-yellow-500 mt-4 mb-6" />
       <Link to={"/admin/categories/add"}>
         <Button color="primary" variant="solid" className="mb-2">
           Add new category

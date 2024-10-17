@@ -86,6 +86,10 @@ const ProductUpdate = () => {
   return (
     <>
       {contextHolder}
+      <h2 className="uppercase font-bold text-xl text-gray-800">
+        Update product
+      </h2>
+      <hr className="border-t-4 border-yellow-500 mt-4 mb-6" />
       <Form
         name="basic"
         labelCol={{

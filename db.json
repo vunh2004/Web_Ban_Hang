@@ -2,11 +2,11 @@
   "products": [
     {
       "id": 2,
-      "title": "Sản phẩm B",
-      "image": "https://picsum.photos/id/2/200",
-      "price": 150000,
+      "title": "iPhone 13",
+      "image": "https://cdn.tgdd.vn/Products/Images/42/250258/iphone-13-midnight-1-600x600.jpg",
+      "price": 15000000,
       "quantity": 5,
-      "description": "Sản phẩm B mới ra mắt, phù hợp cho nhiều đối tượng.",
+      "description": "iPhone 13 là dòng điện thoại cao cấp của Apple, ra mắt với nhiều cải tiến đáng chú ý. Máy được trang bị màn hình OLED Super Retina XDR 6.1 inch, cho hình ảnh sắc nét và màu sắc trung thực. Hiệu năng mạnh mẽ nhờ chip A15 Bionic với khả năng xử lý nhanh chóng và tiết kiệm năng lượng. iPhone 13 còn có cụm camera kép 12MP với công nghệ chụp ảnh Smart HDR 4, giúp cải thiện chất lượng ảnh trong mọi điều kiện ánh sáng. Khả năng chống nước và bụi đạt chuẩn IP68, cùng với thời lượng pin được cải thiện, cho phép người dùng thoải mái sử dụng suốt ngày dài.",
       "available": true,
       "category": 1,
       "createdAt": "2023-10-16T05:00:00.000Z",
@@ -14,11 +14,11 @@
     },
     {
       "id": 3,
-      "title": "Sản phẩm C",
-      "image": "https://picsum.photos/id/3/200",
-      "price": 200000,
+      "title": "iPhone 14",
+      "image": "https://cdn.tgdd.vn/Products/Images/42/240259/iPhone-14-thumb-tim-1-600x600.jpg",
+      "price": 20000000,
       "quantity": 8,
-      "description": "Sản phẩm C với thiết kế độc đáo và tinh tế.",
+      "description": "iPhone 14 là phiên bản tiếp theo của dòng điện thoại thông minh nổi tiếng từ Apple, với nhiều nâng cấp về phần cứng và phần mềm. Máy sở hữu màn hình OLED Super Retina XDR với độ phân giải cao, cho trải nghiệm hình ảnh tuyệt vời, ngay cả dưới ánh sáng mặt trời. Chip A16 Bionic mang đến hiệu năng đột phá, hỗ trợ tối ưu cho các tác vụ như chơi game, chỉnh sửa video và chạy ứng dụng nặng. Camera sau 12MP tích hợp công nghệ Photonic Engine mới, giúp cải thiện khả năng chụp đêm và quay video 4K. Ngoài ra, iPhone 14 còn hỗ trợ kết nối 5G, dung lượng pin lớn hơn và khả năng sạc nhanh, đáp ứng nhu cầu sử dụng của người dùng hiện đại.",
       "available": false,
       "category": 1,
       "createdAt": "2023-10-16T05:30:00.000Z",
@@ -26,11 +26,11 @@
     },
     {
       "id": 4,
-      "title": "Sản phẩm D",
-      "image": "https://picsum.photos/id/4/200",
-      "price": 250000,
+      "title": "Laptop MacBook Air M2",
+      "image": "https://cdn.tgdd.vn/Products/Images/44/322939/macbook-air-15-inch-m3-2024-70w-130324-032500-600x600.jpg",
+      "price": 25000000,
       "quantity": 12,
-      "description": "Sản phẩm D rất được ưa chuộng trên thị trường.",
+      "description": "MacBook Air M2 là dòng laptop siêu mỏng nhẹ mới nhất của Apple, nổi bật với thiết kế tinh tế và sang trọng. Máy sử dụng chip M2 do Apple tự phát triển, mang lại hiệu suất mạnh mẽ và thời lượng pin vượt trội. MacBook Air M2 có màn hình Retina 13.6 inch với công nghệ True Tone, giúp hình ảnh hiển thị sắc nét và sống động. Bàn phím Magic Keyboard với cơ chế cắt kéo đem lại trải nghiệm gõ phím thoải mái và chính xác. Máy hỗ trợ sạc nhanh qua cổng USB-C và có thời lượng pin lên đến 18 giờ, đáp ứng nhu cầu làm việc liên tục suốt cả ngày.",
       "available": true,
       "category": 2,
       "createdAt": "2023-10-16T06:00:00.000Z",
@@ -38,71 +38,91 @@
     },
     {
       "id": 5,
-      "title": "Sản phẩm E",
-      "image": "https://picsum.photos/id/5/200",
-      "price": 300000,
+      "title": "Laptop Dell XPS 13",
+      "image": "https://cdn.tgdd.vn/Products/Images/44/327907/dell-xps-13-9340-ultra-7-hxrgt-130724-110056-600x600.jpg",
+      "price": 30000000,
       "quantity": 20,
-      "description": "Sản phẩm E chất lượng vượt trội, bảo hành dài hạn.",
+      "description": "Dell XPS 13 là dòng laptop cao cấp với thiết kế nhỏ gọn, viền màn hình siêu mỏng, tạo nên một diện mạo tinh tế và hiện đại. Máy được trang bị bộ vi xử lý Intel Core i7 thế hệ mới nhất, mang lại hiệu năng vượt trội, đặc biệt phù hợp cho những công việc đòi hỏi xử lý đa nhiệm và các ứng dụng nặng. Màn hình InfinityEdge 13.4 inch với độ phân giải 4K, hỗ trợ công nghệ Dolby Vision, mang đến trải nghiệm hình ảnh chân thực và sắc nét. Ngoài ra, Dell XPS 13 còn có thời lượng pin lên đến 14 giờ và tích hợp công nghệ sạc nhanh, giúp người dùng duy trì năng suất suốt cả ngày dài.",
       "available": true,
-      "category": 1,
+      "category": 2,
       "createdAt": "2023-10-16T07:00:00.000Z",
       "updatedAt": "2023-10-16T07:00:00.000Z"
     },
     {
-      "title": "new update",
-      "price": 213213,
-      "quantity": 21312312,
-      "description": "mota update",
-      "available": false,
-      "category": 2,
-      "image": "https://res.cloudinary.com/dajbfnrau/image/upload/v1729060494/d3y9umateahbovuqca2k.jpg",
-      "createdAt": "2024-10-16T06:00:00.000Z",
-      "updatedAt": "2024-10-16T06:34:57.000Z",
-      "id": 8
-    },
-    {
-      "title": "ádasd update",
-      "price": 123,
-      "quantity": 21312,
-      "description": "mota update",
-      "category": 2,
-      "createdAt": "2024-10-16T06:30:00.000Z",
-      "updatedAt": "2024-10-16T06:42:31.000Z",
-      "id": 9
-    },
-    {
-      "title": "sadsa",
-      "price": 321,
-      "quantity": 123,
+      "id": 6,
+      "title": "iPhone 12",
+      "image": "https://cdn.tgdd.vn/Products/Images/42/228736/iphone-12-den-600x600.jpg",
+      "price": 13000000,
+      "quantity": 15,
+      "description": "iPhone 12 là dòng smartphone đột phá của Apple, với thiết kế phẳng hơn, sang trọng hơn. Máy được trang bị màn hình OLED Super Retina XDR 6.1 inch, kết hợp với chip A14 Bionic giúp tăng hiệu năng xử lý và giảm tiêu thụ năng lượng. iPhone 12 còn hỗ trợ 5G, giúp trải nghiệm internet nhanh hơn. Camera kép 12MP cùng chế độ chụp đêm nâng cao, mang lại những bức ảnh chất lượng vượt trội trong điều kiện thiếu sáng.",
+      "available": true,
       "category": 1,
-      "createdAt": "2024-10-16T07:06:09.000Z",
-      "id": 10
+      "createdAt": "2023-10-16T08:00:00.000Z",
+      "updatedAt": "2023-10-16T08:00:00.000Z"
     },
     {
-      "title": "adsad",
-      "price": 123,
-      "quantity": 123,
+      "id": 7,
+      "title": "iPhone SE (2022)",
+      "image": "https://cdn.tgdd.vn/Products/Images/42/274158/iphone-se-red-600x600.jpg",
+      "price": 9000000,
+      "quantity": 30,
+      "description": "iPhone SE (2022) là mẫu iPhone nhỏ gọn và tiết kiệm nhất của Apple, nhưng không hề thua kém về hiệu năng. Máy được trang bị chip A15 Bionic tương tự như iPhone 13, mang lại hiệu suất xử lý mượt mà trong mọi tác vụ. iPhone SE còn có camera 12MP với chế độ chụp ảnh chân dung và công nghệ Smart HDR 4, giúp tạo ra những bức ảnh sống động và sắc nét.",
+      "available": true,
+      "category": 1,
+      "createdAt": "2023-10-16T09:00:00.000Z",
+      "updatedAt": "2023-10-16T09:00:00.000Z"
+    },
+    {
+      "id": 8,
+      "title": "Laptop ASUS ROG Strix G15",
+      "image": "https://cdn.tgdd.vn/Products/Images/44/302171/asus-gaming-rog-strix-g15-g513r-r9-hq152w-180223-054023-600x600.jpg",
+      "price": 40000000,
+      "quantity": 7,
+      "description": "ASUS ROG Strix G15 là laptop gaming cao cấp, trang bị bộ vi xử lý AMD Ryzen 9 cùng card đồ họa NVIDIA GeForce RTX 3070, mang đến hiệu năng mạnh mẽ cho mọi tựa game hiện nay. Máy có màn hình 15.6 inch Full HD với tần số quét 300Hz, giúp mọi chuyển động trên màn hình trở nên mượt mà hơn bao giờ hết. Hệ thống làm mát tiên tiến và bàn phím RGB tuỳ chỉnh cũng là những điểm cộng lớn của chiếc máy này.",
+      "available": true,
       "category": 2,
-      "createdAt": "2024-10-16T07:49:15.556Z",
-      "updatedAt": "2024-10-16T08:12:35.868Z",
-      "id": 11
+      "createdAt": "2023-10-16T10:00:00.000Z",
+      "updatedAt": "2023-10-16T10:00:00.000Z"
+    },
+    {
+      "id": 9,
+      "title": "Laptop HP Spectre x360",
+      "image": "https://cdn.tgdd.vn/Products/Images/44/326268/hp-spectre-x360-14-eu0050tu-ultra-7-a19blpa-thumb-600x600.jpg",
+      "price": 35000000,
+      "quantity": 10,
+      "description": "HP Spectre x360 là laptop 2 trong 1 với thiết kế xoay gập 360 độ, cho phép người dùng sử dụng như một máy tính bảng. Máy được trang bị bộ vi xử lý Intel Core i7 thế hệ thứ 11, cùng màn hình OLED 13.3 inch với độ phân giải 4K, mang lại chất lượng hiển thị xuất sắc. Với thời lượng pin lên đến 15 giờ và trọng lượng nhẹ, đây là lựa chọn lý tưởng cho những người dùng cần một thiết bị di động và mạnh mẽ.",
+      "available": true,
+      "category": 2,
+      "createdAt": "2023-10-16T11:00:00.000Z",
+      "updatedAt": "2023-10-16T11:00:00.000Z"
     }
   ],
   "categories": [
     {
       "id": 1,
-      "title": "Category 1",
-      "quantityProduct": 3
-    },
-    {
-      "id": 2,
-      "title": "Category 2",
+      "title": "iPhone",
       "quantityProduct": 4
     },
     {
-      "title": "Category 3",
-      "createdAt": "2024-10-16T08:35:02.509Z",
+      "id": 2,
+      "title": "Laptop",
+      "quantityProduct": 4
+    },
+    {
+      "title": "SamSung",
       "id": 3
+    },
+    {
+      "title": "Macbook",
+      "id": 4
+    },
+    {
+      "title": "Oppo",
+      "id": 5
+    },
+    {
+      "title": "Huawei",
+      "id": 6
     }
   ]
 }

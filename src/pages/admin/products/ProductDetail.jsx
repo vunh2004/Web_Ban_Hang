@@ -69,7 +69,10 @@ const ProductDetail = () => {
 
       <div style={{ maxWidth: 600, margin: "0 auto" }}>
         <Form.Item>
-          <h2 className="uppercase text-3xl font-medium">{data.title}</h2>
+          <h2 className="uppercase  font-bold text-xl text-gray-800">
+            {data.title}
+          </h2>
+          <hr className="border-t-4 border-yellow-500 mt-4 mb-6" />
         </Form.Item>
         <Form.Item label="Image">
           <Image
