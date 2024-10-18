@@ -4,12 +4,15 @@ import "antd/dist/reset.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import moment from "moment"; // Thêm thư viện moment để xử lý ngày
 
 const { Option } = Select;
 
 const Signup = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const nav = useNavigate();
+
+  // Mutation để gửi dữ liệu người dùng đến server
   const { mutate } = useMutation({
     mutationFn: async (user) => {
       await axios.post("http://localhost:3000/signup", user);
@@ -21,11 +24,21 @@ const Signup = () => {
       }, 1000);
     },
     onError(err) {
-      messageApi.error(err.response.data);
+      messageApi.error(err.response?.data || "Something went wrong!");
     },
   });
+
   const onFinish = (values) => {
-    mutate({ ...values, role: "user" });
+    console.log("Form Values:", values); // Kiểm tra giá trị form
+    // Chuyển đổi birthday thành định dạng chuỗi trước khi gửi
+    const userData = {
+      ...values,
+      role: "user",
+      available: true,
+      birthday: values.birthday ? values.birthday.format("YYYY-MM-DD") : null, // Đảm bảo định dạng ngày
+    };
+    console.log("User Data:", userData); // Kiểm tra dữ liệu người dùng
+    mutate(userData);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -40,12 +53,10 @@ const Signup = () => {
         style={{
           backgroundImage:
             "url('https://cdn.hpdecor.vn/wp-content/uploads/2021/08/thiet-ke-sieu-thi-dien-thoai-di-dong-mai-linh-mobile-120m2-tai-nam-dinh-3.jpg')",
-          minHeight: "100vh", // Ensures it covers the full viewport height
+          minHeight: "100vh", // Đảm bảo nó bao phủ toàn bộ chiều cao viewport
         }}
       >
         <div className="flex items-center justify-center w-full mx-auto py-10">
-          {" "}
-          {/* Added padding to center the card */}
           <Card className="bg-white bg-opacity-90 p-8 rounded-lg shadow-lg w-full max-w-md">
             <h2 className="text-3xl font-semibold text-center text-blue-600 mb-2">
               Sign Up
@@ -124,7 +135,8 @@ const Signup = () => {
               <Form.Item label="Birthday" name="birthday">
                 <DatePicker
                   className="w-full"
-                  placeholder="Select your birthday"
+                  placeholder="YYYY-MM-DD"
+                  format="YYYY-MM-DD" // Đặt định dạng cho DatePicker
                   style={{ borderRadius: "4px" }}
                 />
               </Form.Item>

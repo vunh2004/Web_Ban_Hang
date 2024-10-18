@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Popconfirm, Skeleton, message } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom"; // Import useLocation
 import SlideShow from "./SlideShow";
 import Cookies from "js-cookie";
 
@@ -16,33 +16,35 @@ const LayoutClient = () => {
     },
   });
 
-  //!! : chuyển chuỗi sang boolean
   const token = Cookies.get("token");
   const username = Cookies.get("username");
   const role = Cookies.get("role");
 
-  const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get("token")); // Xác định trạng thái đăng nhập (true)
+  const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get("token"));
 
   const Logout = () => {
     Cookies.remove("token");
     Cookies.remove("username");
     Cookies.remove("role");
-    setIsLoggedIn(false); // Cập nhật trạng thái đăng nhập
+    setIsLoggedIn(false);
     messageApi.success("Đã đăng xuất!");
   };
 
   useEffect(() => {
-    setIsLoggedIn(!!Cookies.get("token")); // Kiểm tra lại trạng thái đăng nhập khi component được mount
+    setIsLoggedIn(!!Cookies.get("token"));
   }, []);
+
+  // Sử dụng useLocation để lấy đường dẫn hiện tại
+  const location = useLocation();
 
   return (
     <>
       {contextHolder}
       <React.Fragment>
         <header className="bg-white">
-          <div className="border py-3 px-6">
+          <div className=" py-3 px-6">
             <div className="flex justify-between">
-              <div className="flex items-center">
+              <Link to={"/"} className="flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6 text-red-500"
@@ -60,7 +62,7 @@ const LayoutClient = () => {
                 <span className="ml-2 font-semibold text-[#252C32]">
                   My Website
                 </span>
-              </div>
+              </Link>
 
               <div className="ml-6 flex flex-1 gap-x-3">
                 <div className="flex cursor-pointer select-none items-center gap-x-2 rounded-md border bg-[#4094F7] py-2 px-4 text-white hover:bg-blue-500">
@@ -140,7 +142,7 @@ const LayoutClient = () => {
                 </div>
 
                 {token ? (
-                  <div className="ml-2   flex cursor-pointer items-center gap-x-1 rounded-md border border-transparent bg-gradient-to-r from-green-400 to-blue-500 p-[1px] hover:from-green-500 hover:to-blue-600">
+                  <div className="ml-2 flex cursor-pointer items-center gap-x-1 rounded-md border border-transparent bg-gradient-to-r from-green-400 to-blue-500 p-[1px] hover:from-green-500 hover:to-blue-600">
                     <div className="flex items-center justify-center w-full h-full rounded-md bg-white hover:bg-transparent transition-colors duration-300 ease-in-out">
                       <Popconfirm
                         title="Đăng xuất"
@@ -158,20 +160,19 @@ const LayoutClient = () => {
                     </h3>
                   </div>
                 ) : (
-                  <div className="ml-2   flex cursor-pointer items-center gap-x-1 rounded-md border border-transparent bg-gradient-to-r from-green-400 to-blue-500 p-[1px] hover:from-green-500 hover:to-blue-600">
+                  <div className="ml-2 flex cursor-pointer items-center gap-x-1 rounded-md border border-transparent bg-gradient-to-r from-green-400 to-blue-500 p-[1px] hover:from-green-500 hover:to-blue-600">
                     <Link
                       to="/signin"
                       className="flex items-center justify-center w-full h-full rounded-md bg-white hover:bg-transparent transition-colors duration-300 ease-in-out"
                     >
                       <button className="text-sm px-3 font-semibold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-white transition-all duration-300 ease-in-out">
-                        Sign in
+                        Sign In
                       </button>
                     </Link>
                   </div>
                 )}
               </div>
             </div>
-
             <div className="mt-4 flex items-center justify-between">
               <div className="flex gap-x-8 mx-auto">
                 {data?.length === 0 ? (
@@ -190,9 +191,24 @@ const LayoutClient = () => {
             </div>
           </div>
         </header>
+
+        {/* Hiển thị SlideShow chỉ khi đường dẫn là '/' */}
+        {location.pathname === "/" && <SlideShow />}
+
+        <main className="my-6 mx-3">
+          {isLoading ? (
+            <Skeleton active />
+          ) : isError ? (
+            <p>{error.message}</p>
+          ) : (
+            <Outlet />
+          )}
+        </main>
+
+        <footer className="py-3 text-center text-gray-500">
+          <p>© 2024 My Website. All rights reserved.</p>
+        </footer>
       </React.Fragment>
-      <SlideShow />
-      <Outlet />
     </>
   );
 };

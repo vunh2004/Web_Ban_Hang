@@ -133,6 +133,7 @@
       "confirmPassword": "123456",
       "gender": "male",
       "role": "admin",
+      "available": true,
       "id": 1
     },
     {
@@ -142,7 +143,51 @@
       "confirmPassword": "123456",
       "gender": "male",
       "role": "user",
+      "available": true,
       "id": 2
+    },
+    {
+      "email": "nhvu20102004@gmail.com",
+      "password": "$2a$10$zNaDRcF6buzMk/JMHM.2Su54KNofB2NfKHHKYfPEpNQAM7z4TaYX2",
+      "username": "vu",
+      "confirmPassword": "123456",
+      "gender": "male",
+      "role": "user",
+      "available": true,
+      "id": 3
+    },
+    {
+      "email": "a@gmail.com",
+      "password": "$2a$10$6x7oMGcCmM.NcM4FQVDaceaTjhgtNXDDWE5gUnyYHUc6oirfvH7se",
+      "username": "a",
+      "confirmPassword": "123456",
+      "birthday": null,
+      "gender": "male",
+      "role": "user",
+      "available": true,
+      "id": 4
+    },
+    {
+      "email": "b@gmail.com",
+      "password": "$2a$10$TCjMvuJevDj30BQ5KpTRUOvuI9dW2Bjsg1fETrPUpeqk51XD9Tn0C",
+      "username": "b",
+      "confirmPassword": "123456",
+      "birthday": null,
+      "gender": "male",
+      "role": "user",
+      "available": true,
+      "id": 5
+    },
+    {
+      "email": "c@gmail.com",
+      "password": "$2a$10$zoA7jKQTtKVWq41kKzECCejmixi1Y0uqk9fDpwx1S91SQaKknrB3O",
+      "username": "c",
+      "confirmPassword": "123456",
+      "birthday": "2024-10-14",
+      "gender": "male",
+      "role": "user",
+      "available": true,
+      "id": 6
     }
   ]
 }

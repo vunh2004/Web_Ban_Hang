@@ -14,6 +14,7 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import PrivateRoute from "./pages/PrivateRoute";
 import DetailProduct from "./pages/client/DetailProduct";
+import ListUser from "./pages/admin/users/ListUser";
 
 function App() {
   return (
@@ -33,6 +34,10 @@ function App() {
           <Route path="categories/list" element={<ListCategory />} />
           <Route path="categories/add" element={<AddCategory />} />
           <Route path="categories/:id/update" element={<UpdateCategory />} />
+
+          {/* user */}
+          <Route path="users/list" element={<ListUser />} />
+          <Route path="users/list/:id/update" element={<ListUser />} />
         </Route>
       </Route>
 

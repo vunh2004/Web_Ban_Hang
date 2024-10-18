@@ -28,9 +28,7 @@ const items = [
     getItem("Add Product", "11", null, "/admin/products/add"),
   ]),
   getItem("User", "sub1", <UserOutlined />, null, [
-    getItem("Tom", "3", null, "/admin/user/tom"),
-    getItem("Bill", "4", null, "/admin/user/bill"),
-    getItem("Alex", "5", null, "/admin/user/alex"),
+    getItem("User List", "3", null, "users/list"),
   ]),
   getItem("Category", "sub2", <TeamOutlined />, null, [
     getItem("Category List", "6", null, "/admin/categories/list"),

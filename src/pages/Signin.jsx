@@ -30,7 +30,7 @@ const Signin = () => {
     },
   });
   const onFinish = (values) => {
-    mutate({ ...values, role: "user" });
+    mutate({ ...values, role: "user", available: true });
   };
 
   const onFinishFailed = (errorInfo) => {
