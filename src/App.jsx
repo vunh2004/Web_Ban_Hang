@@ -1,20 +1,23 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import LayoutAdmin from "./layouts/admin/LayoutAdmin";
 import LayoutClient from "./layouts/client/LayoutClient";
+import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
 import Dashboard from "./pages/admin/Dashboard";
-import Home from "./pages/client/Home";
-import ProductsList from "./pages/admin/products/ProductsList";
-import ProductDetail from "./pages/admin/products/ProductDetail";
-import ProductAdd from "./pages/admin/products/ProductAdd";
-import ProductUpdate from "./pages/admin/products/ProductUpdate";
-import UpdateCategory from "./pages/admin/category/UpdateCategory";
 import AddCategory from "./pages/admin/category/AddCategory";
 import ListCategory from "./pages/admin/category/ListCategory";
-import Signup from "./pages/Signup";
-import Signin from "./pages/Signin";
-import PrivateRoute from "./pages/PrivateRoute";
-import DetailProduct from "./pages/client/DetailProduct";
+import UpdateCategory from "./pages/admin/category/UpdateCategory";
+import ProductAdd from "./pages/admin/products/ProductAdd";
+import ProductDetail from "./pages/admin/products/ProductDetail";
+import ProductUpdate from "./pages/admin/products/ProductUpdate";
+import ProductsList from "./pages/admin/products/ProductsList";
 import ListUser from "./pages/admin/users/ListUser";
+import AccountInfor from "./pages/client/AccountInfor";
+import DetailProduct from "./pages/client/DetailProduct";
+import Home from "./pages/client/Home";
+import PrivateRoute from "./pages/router/PrivateRoute";
+import PublicRoute from "./pages/router/PublicRoute";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -44,9 +47,15 @@ function App() {
       <Route path="/" element={<LayoutClient />}>
         <Route index element={<Home />} />
         <Route path="/products/:id" element={<DetailProduct />} />
+
+        <Route path="*" element={<NotFound />} />
       </Route>
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/signin" element={<Signin />} />
+
+      <Route element={<PublicRoute />}>
+        <Route path="/account" element={<AccountInfor />} />
+        <Route path="/account/signup" element={<Signup />} />
+        <Route path="/account/signin" element={<Signin />} />
+      </Route>
     </Routes>
   );
 }

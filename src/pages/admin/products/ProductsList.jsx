@@ -63,6 +63,11 @@ const ProductsList = () => {
       render: (price) => `${price.toLocaleString()} VND`, // Định dạng giá
     },
     {
+      title: "Discount price",
+      dataIndex: "discount_price", // Hiển thị giá sản phẩm
+      render: (price) => `${price.toLocaleString()} VND`, // Định dạng giá
+    },
+    {
       title: "Quantity",
       dataIndex: "quantity", // Hiển thị số lượng
     },
@@ -70,36 +75,38 @@ const ProductsList = () => {
       title: "Available",
       dataIndex: "available",
       render: (item) => {
-        return item ? (
-          <Tag color="blue">CÒN HÀNG</Tag>
-        ) : (
-          <Tag color="red">HẾT HÀNG</Tag>
-        );
+        return item ? <Tag color="blue">ON</Tag> : <Tag color="red"> OFF</Tag>;
       },
     },
     {
       title: "Action",
       render: (_, item) => (
         <>
-          <Link to={`/admin/products/${item.id}`}>
-            <button className="bg-yellow-500 hover:bg-yellow-700 text-white  py-1 px-3.5 rounded mr-1">
-              View
-            </button>
-          </Link>
-          <Link to={`/admin/products/${item.id}/update`}>
-            <button className="bg-green-500 hover:bg-green-700 text-white  py-1 px-3.5 rounded mr-1">
-              Update
-            </button>
-          </Link>
-          <Popconfirm
-            title="Xóa sản phẩm"
-            description="Bạn có chắc chắn muốn xóa sản phẩm này?"
-            onConfirm={() => mutate(item.id)}
-          >
-            <Button color="danger" variant="solid">
-              Delete
-            </Button>
-          </Popconfirm>
+          <div className="justify-center">
+            <div className="flex">
+              <Link to={`/admin/products/${item.id}/update`}>
+                <button className="bg-green-500 hover:bg-green-700 text-white  py-1 px-3.5 rounded mr-1">
+                  Update
+                </button>
+              </Link>
+              <Popconfirm
+                title="Xóa sản phẩm"
+                description="Bạn có chắc chắn muốn xóa sản phẩm này?"
+                onConfirm={() => mutate(item.id)}
+              >
+                <Button color="danger" variant="solid">
+                  Delete
+                </Button>
+              </Popconfirm>
+            </div>
+            <div className="mt-1 ml-12">
+              <Link to={`/admin/products/${item.id}`}>
+                <button className="bg-yellow-500 hover:bg-yellow-700 text-white  py-1 px-3.5 rounded mr-1">
+                  View
+                </button>
+              </Link>
+            </div>
+          </div>
         </>
       ),
     },

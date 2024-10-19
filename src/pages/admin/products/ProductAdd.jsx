@@ -1,4 +1,3 @@
-//Form
 import { PlusOutlined } from "@ant-design/icons";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -23,17 +22,18 @@ const normFile = (e) => {
   }
   return e?.fileList;
 };
-const App = () => {
+
+const ProductAdd = () => {
   const nav = useNavigate();
+  const [form] = Form.useForm();
   const [messageApi, contextHolder] = message.useMessage();
   const queryClient = useQueryClient();
   const [image, setImage] = useState();
 
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
       const response = await axios.get(`http://localhost:3000/categories`);
-      // Trả về dữ liệu với key là id
       return response.data.map((category) => ({
         ...category,
         key: category.id,
@@ -47,12 +47,13 @@ const App = () => {
     },
     onSuccess() {
       messageApi.success("Thêm sản phẩm thành công!");
-      queryClient.invalidateQueries({
-        queryKey: ["products"],
-      });
+      queryClient.invalidateQueries({ queryKey: ["products"] });
       setTimeout(() => {
         nav("/admin/products/list");
       }, 1000);
+    },
+    onError() {
+      messageApi.error("Có lỗi xảy ra khi thêm sản phẩm!");
     },
   });
 
@@ -61,13 +62,17 @@ const App = () => {
       setImage(img.file.response.secure_url);
     }
   };
+
   const onFinish = (values) => {
     mutate({ ...values, image, createdAt: new Date().toISOString() });
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
   if (isLoading) return <Skeleton active />;
+
   return (
     <>
       {contextHolder}
@@ -76,6 +81,7 @@ const App = () => {
       </h2>
       <hr className="border-t-4 border-yellow-500 mt-4 mb-6" />
       <Form
+        form={form} // Sử dụng form để quản lý giá trị
         name="basic"
         labelCol={{
           span: 8,
@@ -122,6 +128,32 @@ const App = () => {
               type: "number",
               min: 0,
               message: "Price phải >= 0",
+            },
+          ]}
+        >
+          <InputNumber type="number" />
+        </Form.Item>
+
+        <Form.Item
+          label="Discount price"
+          name="discount_price"
+          rules={[
+            {
+              type: "number",
+              min: 0,
+              message: "Discount price phải >= 0",
+            },
+            {
+              validator: (_, value) => {
+                const price = form.getFieldValue("price");
+                console.log("Price: ", price, " Discount Price: ", value);
+                if (value !== undefined && value > price) {
+                  return Promise.reject(
+                    new Error("Discount price phải nhỏ hơn price!")
+                  );
+                }
+                return Promise.resolve();
+              },
             },
           ]}
         >
@@ -218,4 +250,5 @@ const App = () => {
     </>
   );
 };
-export default App;
+
+export default ProductAdd;

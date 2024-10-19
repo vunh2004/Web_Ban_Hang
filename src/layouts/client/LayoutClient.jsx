@@ -2,12 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { Popconfirm, Skeleton, message } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom"; // Import useLocation
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom"; // Import useLocation
 import SlideShow from "./SlideShow";
 import Cookies from "js-cookie";
 
 const LayoutClient = () => {
   const [messageApi, contextHolder] = message.useMessage();
+  const nav = useNavigate();
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
@@ -26,8 +27,12 @@ const LayoutClient = () => {
     Cookies.remove("token");
     Cookies.remove("username");
     Cookies.remove("role");
+    Cookies.remove("id");
     setIsLoggedIn(false);
     messageApi.success("Đã đăng xuất!");
+    setTimeout(() => {
+      nav("/");
+    }, 0);
   };
 
   useEffect(() => {
@@ -162,7 +167,7 @@ const LayoutClient = () => {
                 ) : (
                   <div className="ml-2 flex cursor-pointer items-center gap-x-1 rounded-md border border-transparent bg-gradient-to-r from-green-400 to-blue-500 p-[1px] hover:from-green-500 hover:to-blue-600">
                     <Link
-                      to="/signin"
+                      to="/account/signin"
                       className="flex items-center justify-center w-full h-full rounded-md bg-white hover:bg-transparent transition-colors duration-300 ease-in-out"
                     >
                       <button className="text-sm px-3 font-semibold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-white transition-all duration-300 ease-in-out">

@@ -20,7 +20,7 @@ const Signup = () => {
     onSuccess() {
       messageApi.success("Sign up successfully!");
       setTimeout(() => {
-        nav("/signin");
+        nav("/account/signin");
       }, 1000);
     },
     onError(err) {
@@ -75,6 +75,9 @@ const Signup = () => {
                   size="large"
                   placeholder="Enter your username"
                   className="text-sm px-3 py-2"
+                  rules={[
+                    { required: true, message: "Username cannot be empty!" },
+                  ]}
                 />
               </Form.Item>
 
@@ -173,7 +176,7 @@ const Signup = () => {
               <div className="flex justify-end mt-4">
                 <span className="text-gray-700">Already have an account? </span>
                 <Link
-                  to={"/signin"}
+                  to={"/account/signin"}
                   className="text-red-400 hover:text-red-600 font-semibold hover:underline ml-2 transition duration-300 transform hover:scale-105"
                 >
                   Sign In Now

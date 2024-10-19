@@ -11,7 +11,7 @@ const PrivateRoute = () => {
   // Nếu có token thì render component (tức là cho phép truy cập)
   // Nếu không có token, điều hướng tới trang đăng nhập
   if (!token) {
-    return <Navigate to={"/signin"} />;
+    return <Navigate to={"/account/signin"} />;
   } else {
     if (role === "admin") {
       return <Outlet />;

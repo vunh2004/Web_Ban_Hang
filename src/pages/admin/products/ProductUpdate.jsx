@@ -27,6 +27,7 @@ const normFile = (e) => {
 const ProductUpdate = () => {
   const nav = useNavigate();
   const { id } = useParams();
+  const [form] = Form.useForm();
   const [messageApi, contextHolder] = message.useMessage();
   const queryClient = useQueryClient();
   const [image, setImage] = useState();
@@ -91,6 +92,7 @@ const ProductUpdate = () => {
       </h2>
       <hr className="border-t-4 border-yellow-500 mt-4 mb-6" />
       <Form
+        form={form}
         name="basic"
         labelCol={{
           span: 8,
@@ -135,6 +137,32 @@ const ProductUpdate = () => {
               type: "number",
               min: 0,
               message: "Price phải >= 0",
+            },
+          ]}
+        >
+          <InputNumber type="number" />
+        </Form.Item>
+
+        <Form.Item
+          label="Discount price"
+          name="discount_price"
+          rules={[
+            {
+              type: "number",
+              min: 0,
+              message: "Discount price phải >= 0",
+            },
+            {
+              validator: (_, value) => {
+                const price = form.getFieldValue("price");
+                console.log("Price: ", price, " Discount Price: ", value);
+                if (value !== undefined && value > price) {
+                  return Promise.reject(
+                    new Error("Discount price phải nhỏ hơn price!")
+                  );
+                }
+                return Promise.resolve();
+              },
             },
           ]}
         >

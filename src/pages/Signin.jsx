@@ -16,9 +16,13 @@ const Signin = () => {
     },
     onSuccess(data) {
       // console.log(data.user.role);
-      Cookies.set("token", data.accessToken, { expires: 1 / 24 });
-      Cookies.set("role", data.user.role, { expires: 1 / 24 });
-      Cookies.set("username", data.user.username, { expires: 1 / 24 });
+      Cookies.set("token", data.accessToken, { expires: 1 / 24, path: "/" });
+      Cookies.set("role", data.user.role, { expires: 1 / 24, path: "/" });
+      Cookies.set("username", data.user.username, {
+        expires: 1 / 24,
+        path: "/",
+      });
+      Cookies.set("id", data.user.id, { expires: 1 / 24, path: "/" });
 
       messageApi.success("Sign in successfully!");
       setTimeout(() => {
@@ -103,7 +107,7 @@ const Signin = () => {
               <div className="flex justify-end mt-4">
                 <span className="text-gray-700">Create an account? </span>
                 <Link
-                  to={"/signup"}
+                  to={"/account/signup"}
                   className="text-red-400 hover:text-red-600 font-semibold hover:underline ml-2 transition duration-300 transform hover:scale-105"
                 >
                   Sign Up Now

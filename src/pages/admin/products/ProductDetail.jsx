@@ -86,6 +86,9 @@ const ProductDetail = () => {
           <Form.Item label="Price: ">
             <InputNumber value={data.price} readOnly /> VND
           </Form.Item>
+          <Form.Item label="Discount price: ">
+            <InputNumber value={data.discount_price} readOnly /> VND
+          </Form.Item>
           <Form.Item label="Quantity: ">
             <InputNumber value={data.quantity} readOnly />
           </Form.Item>
