@@ -12,6 +12,14 @@ const Signin = () => {
   const { mutate } = useMutation({
     mutationFn: async (user) => {
       const response = await axios.post("http://localhost:3000/signin", user);
+      if (!response.data.user.available) {
+        alert(
+          "Tài khoản của bạn đã bị vô hiệu hóa bởi quản trị viên. \nVui lòng liên hệ vunhph45875@fpt.edu.vn hoặc gọi 0896.156.302 để nhận thêm thông tin."
+        );
+        nav("/account/signin");
+        return;
+      }
+
       return response.data;
     },
     onSuccess(data) {

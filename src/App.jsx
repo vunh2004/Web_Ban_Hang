@@ -18,6 +18,8 @@ import Home from "./pages/client/Home";
 import PrivateRoute from "./pages/router/PrivateRoute";
 import PublicRoute from "./pages/router/PublicRoute";
 import NotFound from "./pages/NotFound";
+import UpdateUser from "./pages/admin/users/UpdateUser";
+import Cart from "./pages/client/Cart";
 
 function App() {
   return (
@@ -40,13 +42,16 @@ function App() {
 
           {/* user */}
           <Route path="users/list" element={<ListUser />} />
-          <Route path="users/list/:id/update" element={<ListUser />} />
+          <Route path="users/:id/update" element={<UpdateUser />} />
         </Route>
       </Route>
 
       <Route path="/" element={<LayoutClient />}>
         <Route index element={<Home />} />
         <Route path="/products/:id" element={<DetailProduct />} />
+
+        {/* Cart */}
+        <Route path="/carts" element={<Cart />} />
 
         <Route path="*" element={<NotFound />} />
       </Route>

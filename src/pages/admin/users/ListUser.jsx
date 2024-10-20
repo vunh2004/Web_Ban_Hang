@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Popconfirm, Skeleton, Switch, Table, Tag } from "antd";
+import { Skeleton, Table, Tag } from "antd";
 import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -57,10 +57,10 @@ const ListUser = () => {
       title: "Available",
       dataIndex: "available",
       render: (item) => {
-        return (
-          <>
-            <Switch checked={item} />
-          </>
+        return item ? (
+          <Tag color="green">Đang hoạt động</Tag>
+        ) : (
+          <Tag color="red">Ngưng hoạt động</Tag>
         );
       },
     },

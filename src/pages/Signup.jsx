@@ -1,10 +1,9 @@
-import React from "react";
-import { Form, Input, Button, Card, DatePicker, Select, message } from "antd";
-import "antd/dist/reset.css";
-import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
+import { Button, Card, DatePicker, Form, Input, Select, message } from "antd";
+import "antd/dist/reset.css";
 import axios from "axios";
-import moment from "moment"; // Thêm thư viện moment để xử lý ngày
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 
@@ -35,7 +34,7 @@ const Signup = () => {
       ...values,
       role: "user",
       available: true,
-      birthday: values.birthday ? values.birthday.format("YYYY-MM-DD") : null, // Đảm bảo định dạng ngày
+      birthday: values.birthday ? values.birthday.format("DD-MM-YYYY") : null, // Đảm bảo định dạng ngày
     };
     console.log("User Data:", userData); // Kiểm tra dữ liệu người dùng
     mutate(userData);
@@ -70,14 +69,17 @@ const Signup = () => {
               onFinishFailed={onFinishFailed}
               layout="vertical"
             >
-              <Form.Item label="Username" name="username">
+              <Form.Item
+                label="Username"
+                name="username"
+                rules={[
+                  { required: true, message: "Username cannot be empty!" },
+                ]}
+              >
                 <Input
                   size="large"
                   placeholder="Enter your username"
                   className="text-sm px-3 py-2"
-                  rules={[
-                    { required: true, message: "Username cannot be empty!" },
-                  ]}
                 />
               </Form.Item>
 
@@ -138,8 +140,8 @@ const Signup = () => {
               <Form.Item label="Birthday" name="birthday">
                 <DatePicker
                   className="w-full"
-                  placeholder="YYYY-MM-DD"
-                  format="YYYY-MM-DD" // Đặt định dạng cho DatePicker
+                  placeholder="DD-MM-YYYY"
+                  format="DD-MM-YYYY" // Đặt định dạng cho DatePicker
                   style={{ borderRadius: "4px" }}
                 />
               </Form.Item>
