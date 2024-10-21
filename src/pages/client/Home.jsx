@@ -29,9 +29,9 @@ const Home = () => {
       );
       const product = productResponse.data;
 
-      // Tìm sản phẩm trong giỏ hàng
+      // Tìm sản phẩm trong giỏ hàng dựa trên idUser và idProduct
       const checkProductCart = carts.find(
-        (item) => item.idProduct === idProduct
+        (item) => item.idProduct === idProduct && item.idUser === idUser
       );
 
       if (checkProductCart) {
@@ -57,9 +57,9 @@ const Home = () => {
     },
     onSuccess() {
       messageApi.success("Thêm sản phẩm vào giỏ hàng thành công");
-      // setTimeout(() => {
-      //   nav("/carts");
-      // }, 10);
+      setTimeout(() => {
+        nav("/carts");
+      }, 10);
     },
     onError: (error) => {
       messageApi.error(`Lỗi: ${error.message}`);

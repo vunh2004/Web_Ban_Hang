@@ -145,16 +145,6 @@
       "id": 9
     },
     {
-      "username": "user",
-      "email": "user@gmail.com",
-      "birthday": "2004-10-20",
-      "gender": "male",
-      "role": "user",
-      "available": true,
-      "password": "$2a$10$ReCKqyl5LjXHPpw28xoeR.MUXU3xjVYHRNiaEXEcUoHVUpe1wahFG",
-      "id": 2
-    },
-    {
       "username": "aa",
       "password": "$2a$10$bmlE9h9R7xOTRnGXssXF5.unF0x0AurIt4wPKI5H9fjjOFe6h4CPG",
       "confirmPassword": "123456",
@@ -164,7 +154,33 @@
       "role": "user",
       "available": true,
       "id": 10
+    },
+    {
+      "email": "user@gmail.com",
+      "password": "$2a$10$D3F5xH.esVPypRQL6QYfM.mU9A990Rv1zsV/VIda.8O8wX1fps00e",
+      "username": "user",
+      "confirmPassword": "123456",
+      "birthday": "20-10-2004",
+      "gender": "male",
+      "role": "user",
+      "available": true,
+      "id": 11
     }
   ],
-  "carts": []
+  "carts": [
+    {
+      "idProduct": 2,
+      "idUser": "10",
+      "quantity": 1,
+      "totalPrice": 12000000,
+      "id": 1
+    },
+    {
+      "idProduct": 4,
+      "idUser": "10",
+      "quantity": 2,
+      "totalPrice": 23000000,
+      "id": 2
+    }
+  ]
 }
