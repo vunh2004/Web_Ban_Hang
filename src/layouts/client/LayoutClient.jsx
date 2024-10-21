@@ -96,7 +96,10 @@ const LayoutClient = () => {
               </div>
 
               <div className="ml-2 flex">
-                <div className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
+                <Link
+                  to={"/orders"}
+                  className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5 text-gray-500"
@@ -111,7 +114,7 @@ const LayoutClient = () => {
                     />
                   </svg>
                   <span className="text-sm font-medium">Orders</span>
-                </div>
+                </Link>
 
                 <div className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
                   <svg

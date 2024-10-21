@@ -1,12 +1,14 @@
+import { useMutation } from "@tanstack/react-query";
 import { Button, Form, Input } from "antd";
 import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [products, setProducts] = useState([]);
+  const nav = useNavigate();
   const idUser = Cookies.get("id"); // Lấy idUser từ cookies
 
   useEffect(() => {
@@ -92,9 +94,49 @@ const Cart = () => {
     return total + (product ? product.discount_price * cartItem.quantity : 0);
   }, 0);
 
-  const onFinish = (values) => {
-    console.log("Received values:", values);
-    // Thực hiện xử lý sau khi form được gửi
+  const onRemoveCart = async (idCart) => {
+    if (confirm("Bạn có chắc chắn muốn xóa đơn hàng này?")) {
+      await axios.delete(`http://localhost:3000/carts/${idCart}`);
+      setCartItems(
+        (cartItem) =>
+          (cartItem = cartItems.filter((cart) => cart.id !== idCart))
+      );
+    }
+  };
+
+  const onFinish = async (values) => {
+    // Tạo payload chứa thông tin đơn hàng và giỏ hàng
+    const payload = {
+      ...values, // Các giá trị khác từ form
+      idUser: idUser,
+      orderDate: new Date().toISOString(), // Ngày đặt hàng hiện tại
+      totalAmount: totalAmount, // Tổng số tiền
+      status: "Chờ xác nhận", // Trạng thái đơn hàng ban đầu
+      products: cartItems.map((item) => ({
+        idProduct: item.idProduct, // ID sản phẩm
+        quantity: item.quantity, // Số lượng sản phẩm
+      })),
+    };
+
+    try {
+      // Gửi request POST để tạo đơn hàng
+      const response = await axios.post(
+        "http://localhost:3000/orders",
+        payload
+      );
+
+      // Sau khi đặt hàng thành công, xóa từng mục trong giỏ hàng
+      await Promise.all(
+        cartItems.map((item) =>
+          axios.delete(`http://localhost:3000/carts/${item.id}`)
+        )
+      );
+
+      alert("Đặt hàng thành công!");
+      nav("/orders");
+    } catch (error) {
+      console.error("Lỗi khi đặt hàng:", error);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -242,6 +284,7 @@ const Cart = () => {
                             </Link>
                             <div className="flex items-center gap-4">
                               <button
+                                onClick={() => onRemoveCart(cartItem.id)}
                                 type="button"
                                 className="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500"
                               >
@@ -340,32 +383,15 @@ const Cart = () => {
                     <Input placeholder="Nhập số điện thoại" />
                   </Form.Item>
                   <Form.Item
-                    label="Thành phố"
-                    name="city"
+                    label="Địa chỉ"
+                    name="address"
                     rules={[
-                      { required: true, message: "Thành phố là bắt buộc!" },
+                      { required: true, message: "Địa chỉ là bắt buộc!" },
                     ]}
                   >
-                    <Input placeholder="Nhập thành phố" />
+                    <Input placeholder="Tỉnh/Thành phố, Quận/Huyện, Phường/Xã, Tổ dân phố/Thôn(Xóm)" />
                   </Form.Item>
-                  <Form.Item
-                    label="Quận/Huyện"
-                    name="district"
-                    rules={[
-                      { required: true, message: "Quận/Huyện là bắt buộc!" },
-                    ]}
-                  >
-                    <Input placeholder="Nhập quận/huyện" />
-                  </Form.Item>
-                  <Form.Item
-                    label="Phường/Xã"
-                    name="ward"
-                    rules={[
-                      { required: true, message: "Phường/Xã là bắt buộc!" },
-                    ]}
-                  >
-                    <Input placeholder="Nhập phường/xã" />
-                  </Form.Item>
+
                   <Form.Item label="Ghi chú" name="note">
                     <Input.TextArea placeholder="Nhập ghi chú (nếu có)" />
                   </Form.Item>

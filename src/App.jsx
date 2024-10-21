@@ -20,6 +20,8 @@ import PublicRoute from "./pages/router/PublicRoute";
 import NotFound from "./pages/NotFound";
 import UpdateUser from "./pages/admin/users/UpdateUser";
 import Cart from "./pages/client/Cart";
+import Orders from "./pages/client/orders/Orders";
+import DetailOrder from "./pages/client/orders/DetailOrder";
 
 function App() {
   return (
@@ -48,10 +50,14 @@ function App() {
 
       <Route path="/" element={<LayoutClient />}>
         <Route index element={<Home />} />
-        <Route path="/products/:id" element={<DetailProduct />} />
+        <Route path="products/:id" element={<DetailProduct />} />
 
         {/* Cart */}
-        <Route path="/carts" element={<Cart />} />
+        <Route path="carts" element={<Cart />} />
+
+        {/* Orders */}
+        <Route path="orders" element={<Orders />} />
+        <Route path="orders/:id" element={<DetailOrder />} />
 
         <Route path="*" element={<NotFound />} />
       </Route>
