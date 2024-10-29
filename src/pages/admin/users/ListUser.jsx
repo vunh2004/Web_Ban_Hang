@@ -83,6 +83,8 @@ const ListUser = () => {
 
   return (
     <>
+      <h2 className="uppercase font-bold text-xl text-gray-800">List users</h2>
+      <hr className="border-t-4 border-yellow-500 mt-4 mb-6" />
       <Table columns={columns} dataSource={data} />
     </>
   );

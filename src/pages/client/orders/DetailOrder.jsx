@@ -128,7 +128,7 @@ const OrderDetail = () => {
         <p className="text-gray-600">
           <strong>Trạng thái:</strong>
           <Tag
-            color={orders.status === "Pending" ? "gold" : "green"}
+            color={orders.status === "Đã nhận hàng" ? "gold" : "green"}
             className="ml-2"
           >
             {orders.status}

@@ -22,12 +22,15 @@ import UpdateUser from "./pages/admin/users/UpdateUser";
 import Cart from "./pages/client/Cart";
 import Orders from "./pages/client/orders/Orders";
 import DetailOrder from "./pages/client/orders/DetailOrder";
+import ListOrders from "./pages/admin/orders/ListOrders";
+import UpdateOrder from "./pages/admin/orders/UpdateOrder";
+import ViewOrder from "./pages/admin/orders/ViewOrder";
 
 function App() {
   return (
     <Routes>
       {/* LayoutAdmin sẽ bọc tất cả các tuyến con */}
-      <Route path="/admin" element={<PrivateRoute />}>
+      <Route path="admin" element={<PrivateRoute />}>
         <Route element={<LayoutAdmin />}>
           <Route index element={<Navigate to="/admin/dashboard" />} />
           <Route path="dashboard" element={<Dashboard />} />
@@ -45,6 +48,11 @@ function App() {
           {/* user */}
           <Route path="users/list" element={<ListUser />} />
           <Route path="users/:id/update" element={<UpdateUser />} />
+
+          {/* orders */}
+          <Route path="orders/list" element={<ListOrders />} />
+          <Route path="orders/:id" element={<ViewOrder />} />
+          <Route path="orders/:id/update" element={<UpdateOrder />} />
         </Route>
       </Route>
 
