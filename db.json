@@ -170,25 +170,42 @@
   "carts": [],
   "orders": [
     {
-      "fullName": "Vũ Nguyễn",
+      "fullName": "Nguyễn Hoàng Vũ",
       "email": "nhvu20102004@gmail.com",
       "phoneNumber": "0363158698",
       "address": "Hà Nội",
       "idUser": "11",
-      "orderDate": "2024-10-29T09:37:52.601Z",
-      "totalAmount": 47000000,
-      "status": "Chờ xác nhận",
+      "orderDate": "2024-10-29T15:12:03.961Z",
+      "totalAmount": 42000000,
+      "status": "Đã hủy",
       "products": [
         {
           "idProduct": 2,
           "quantity": 2
         },
         {
+          "idProduct": 3,
+          "quantity": 1
+        }
+      ],
+      "id": 2
+    },
+    {
+      "fullName": "Vũ Nguyễn",
+      "email": "nhvu20102004@gmail.com",
+      "phoneNumber": "0363158698",
+      "address": "Hà Nội",
+      "idUser": "11",
+      "orderDate": "2024-10-29T16:28:10.866Z",
+      "totalAmount": 23000000,
+      "status": "Chờ xác nhận",
+      "products": [
+        {
           "idProduct": 4,
           "quantity": 1
         }
       ],
-      "id": 1
+      "id": 3
     }
   ]
 }

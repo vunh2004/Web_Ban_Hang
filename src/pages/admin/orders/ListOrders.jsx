@@ -21,16 +21,24 @@ const ListOrders = () => {
 
   const { mutate } = useMutation({
     mutationFn: async (id) => {
-      await axios.delete(`http://localhost:3000/orders/${id}`);
+      const response = await axios.get(`http://localhost:3000/orders/${id}`);
+      const currentOrder = response.data;
+
+      const cancelOrder = {
+        ...currentOrder, // Giữ lại tất cả thông tin cũ
+        status: "Đã hủy", // Cập nhật trạng thái mới
+      };
+
+      await axios.put(`http://localhost:3000/orders/${id}`, cancelOrder);
     },
     onSuccess() {
-      messageApi.success("Xóa đơn hàng thành công!");
+      messageApi.success("Hủy đơn hàng thành công!");
       queryClient.invalidateQueries({
         queryKey: ["orders"],
       });
     },
     onError() {
-      messageApi.error("Xóa đơn hàng thất bại!");
+      messageApi.error("Hủy đơn hàng thất bại!");
     },
   });
 
@@ -56,7 +64,7 @@ const ListOrders = () => {
       dataIndex: "totalAmount",
       render: (total) => {
         return (
-          <span className="font-semibold">{total.toLocaleString()} VND</span>
+          <span className="font-semibold">{total?.toLocaleString()} VNĐ</span>
         );
       },
     },
@@ -95,25 +103,29 @@ const ListOrders = () => {
         <>
           <Link to={`/admin/orders/${item.id}/update`}>
             <button className="bg-green-500 hover:bg-green-700 text-white  py-1 px-3.5 rounded mr-1">
-              Update
+              Cập nhật
             </button>
           </Link>
-          <Popconfirm
-            title="Xóa đơn hàng"
-            description="Bạn có chắc chắn muốn xóa đơn hàng này?"
-            onConfirm={() => mutate(item.id)}
-          >
-            <button className="bg-red-500 hover:bg-red-700 text-white  py-1 px-3.5 rounded mr-1">
-              Delete
+          <Link to={`/admin/orders/${item.id}`}>
+            <button className="bg-yellow-500 hover:bg-yellow-700 text-white  py-1 px-3.5 rounded mr-1">
+              Xem
             </button>
-          </Popconfirm>
-          <div className="mt-1 ml-12">
-            <Link to={`/admin/orders/${item.id}`}>
-              <button className="bg-yellow-500 hover:bg-yellow-700 text-white  py-1 px-3.5 rounded mr-1">
-                View
+          </Link>
+          {item?.status === "Đang giao hàng" ||
+          item?.status === "Đã hủy" ||
+          item?.status === "Đã nhận hàng" ? (
+            ""
+          ) : (
+            <Popconfirm
+              title="Hủy đơn hàng"
+              description="Bạn có chắc chắn muốn hủy đơn hàng này?"
+              onConfirm={() => mutate(item.id)}
+            >
+              <button className="bg-red-500 hover:bg-red-700 text-white  py-1 px-3.5 rounded mr-1">
+                Hủy đơn hàng
               </button>
-            </Link>
-          </div>
+            </Popconfirm>
+          )}
         </>
       ),
     },

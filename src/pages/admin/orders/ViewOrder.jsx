@@ -1,11 +1,20 @@
-import { Card, Divider, Form, Input, List } from "antd"; // Thêm List từ antd
+import {
+  Card,
+  Divider,
+  Form,
+  Input,
+  List,
+  Avatar,
+  Typography,
+  Tag,
+} from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const ViewOrder = () => {
   const [order, setOrder] = useState(null);
-  const [allProduct, setAppProduct] = useState([]);
+  const [allProduct, setAllProduct] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -31,7 +40,7 @@ const ViewOrder = () => {
 
           const productResponses = await Promise.all(productRequests);
           const productsOrder = productResponses.map((item) => item.data);
-          setAppProduct(productsOrder);
+          setAllProduct(productsOrder);
         }
       } catch (error) {
         alert("Có lỗi xảy ra khi lấy thông tin sản phẩm: " + error.message);
@@ -59,53 +68,146 @@ const ViewOrder = () => {
       <Card className="mb-4">
         <Divider orientation="left">Thông tin sản phẩm</Divider>
         <List
-          itemLayout="horizontal"
+          itemLayout="vertical"
           dataSource={allProduct}
           renderItem={(product) => (
             <List.Item>
-              <List.Item.Meta
-                title={product.title} // Thay đổi theo tên thuộc tính trong sản phẩm
-                description={
-                  <>
-                    <div>Giá: {product.price} VNĐ</div>
-                    <div>
-                      Số lượng:{" "}
+              <div className="flex items-center gap-4 p-4 border-b border-gray-200">
+                <Avatar
+                  src={product.image}
+                  alt={product.title}
+                  size={100}
+                  className="border p-1.5 rounded-lg shadow-lg"
+                />
+                <div className="w-full flex flex-col bg-white shadow-lg rounded-lg p-4 border border-gray-200 space-y-2">
+                  <Typography.Title
+                    level={5}
+                    className="text-gray-800 font-semibold"
+                  >
+                    {product.title}
+                  </Typography.Title>
+
+                  <div className="flex items-center justify-between">
+                    <Typography.Text className="text-gray-600">
+                      Đơn giá:
+                    </Typography.Text>
+                    <Typography.Text className="font-medium text-yellow-600">
+                      {product.discount_price.toLocaleString()} VNĐ
+                    </Typography.Text>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <Typography.Text className="text-gray-600">
+                      Số lượng:
+                    </Typography.Text>
+                    <Typography.Text className="font-medium">
                       {
                         order?.products.find((p) => p.idProduct === product.id)
                           ?.quantity
                       }
-                    </div>
-                  </>
-                }
-              />
+                    </Typography.Text>
+                  </div>
+
+                  <div className="flex items-center justify-between border-t border-gray-300 pt-2">
+                    <Typography.Text className="text-gray-600 font-medium">
+                      Tổng cộng:
+                    </Typography.Text>
+                    <Typography.Text className="text-red-600 font-semibold">
+                      {(
+                        order?.products.find((p) => p.idProduct === product.id)
+                          ?.quantity * product.discount_price
+                      ).toLocaleString()}{" "}
+                      VNĐ
+                    </Typography.Text>
+                  </div>
+                </div>
+              </div>
             </List.Item>
           )}
         />
+
+        {/* Thông tin chung về đơn hàng */}
+        <div className="mt-4 p-4  ">
+          <div className="flex items-center justify-between  ">
+            <Typography.Text className="text-gray-600 font-medium">
+              Thành tiền:
+            </Typography.Text>
+            <Typography.Text className="text-red-600 font-semibold">
+              {order?.totalAmount.toLocaleString()} VNĐ
+            </Typography.Text>
+          </div>
+
+          <div className="flex items-center justify-between border-b border-gray-300 py-2">
+            <Typography.Text className="text-gray-600">
+              Ngày đặt:
+            </Typography.Text>
+            <Typography.Text className="font-medium text-gray-600">
+              {order?.orderDate
+                ? new Date(order.orderDate).toLocaleDateString()
+                : "N/A"}
+            </Typography.Text>
+          </div>
+
+          <div className="flex items-center justify-between py-2">
+            <Typography.Text className="text-gray-600">
+              Trạng thái:
+            </Typography.Text>
+            <Typography.Text className="font-medium text-blue-600">
+              {order?.status === "Đã nhận hàng" ? (
+                <Tag className="text-base p-1" color="yellow">
+                  {order?.status}
+                </Tag>
+              ) : (
+                <Tag className="text-base p-1" color="blue">
+                  {order?.status}
+                </Tag>
+              )}
+            </Typography.Text>
+          </div>
+        </div>
       </Card>
 
-      <Card>
-        <Divider orientation="left">Thông tin người nhận</Divider>
-        <Form
-          name="receiverInfo"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
-          style={{ maxWidth: 600 }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
+      <Card className="shadow-lg rounded-lg mb-4">
+        <Divider
+          orientation="left"
+          className="font-semibold text-lg text-gray-800"
         >
-          <Form.Item label="Tên người nhận">
-            <Input readOnly value={order?.fullName} />
-          </Form.Item>
-          <Form.Item label="Email">
-            <Input readOnly value={order?.email} />
-          </Form.Item>
-          <Form.Item label="Địa chỉ">
-            <Input readOnly value={order?.address} />
-          </Form.Item>
-          <Form.Item label="Số điện thoại">
-            <Input value={order?.phoneNumber} />
-          </Form.Item>
-        </Form>
+          Thông tin người nhận
+        </Divider>
+        <div className="p-4 bg-gray-50 rounded-lg">
+          <div className="flex justify-between mb-1">
+            <Typography.Text className="font-medium text-gray-700">
+              Tên người nhận:
+            </Typography.Text>
+            <Typography.Text className="text-gray-800">
+              {order?.fullName || "N/A"}
+            </Typography.Text>
+          </div>
+          <div className="flex justify-between mb-1">
+            <Typography.Text className="font-medium text-gray-700">
+              Email:
+            </Typography.Text>
+            <Typography.Text className="text-gray-800">
+              {order?.email || "N/A"}
+            </Typography.Text>
+          </div>
+          <div className="flex justify-between mb-1">
+            <Typography.Text className="font-medium text-gray-700">
+              Địa chỉ:
+            </Typography.Text>
+            <Typography.Text className="text-gray-800">
+              {order?.address || "N/A"}
+            </Typography.Text>
+          </div>
+          <div className="flex justify-between mb-1">
+            <Typography.Text className="font-medium text-gray-700">
+              Số điện thoại:
+            </Typography.Text>
+            <Typography.Text className="text-gray-800">
+              {order?.phoneNumber || "N/A"}
+            </Typography.Text>
+          </div>
+        </div>
       </Card>
     </>
   );
